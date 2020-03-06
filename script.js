@@ -1,4 +1,7 @@
- function inputPeserta(ev) {
+
+   
+
+    function inputPeserta(ev) {
 
         // console.log(ev);
 
@@ -6,8 +9,8 @@
         var tbody_count = $("#tbody-forum").children().last().data("inc");
         var count_class = !tbody_count ? 0 : (parseInt(tbody_count));
 
-        var kat_id = $("select[name=kategori] option:selected").val();
-        var kat_text = $("select[name=kategori] option:selected").text();
+        var kat_id = $("select[name=org] option:selected").val();
+        var kat_text = $("select[name=org] option:selected").text();
 
         var role_id = $("select[name=roles] option:selected").val();
         var role_text = $("select[name=roles] option:selected").text();
@@ -26,18 +29,18 @@
                 $("#tbody-forum").html("")
             }
             var frame = "<tr class='tr-forum' data-inc='" + (count_class + 1) + "' id='tr-comp-" + (count_class + 1) + "' >" +
-                "<td class='text-center align-middle numberic' id='text-number" + (count_class + 1) + "'>" + +"</td>" +
+                "<td class='text-center align-middle numberic' id='text-number" + (count_class + 1) + "'>" + (count_class + 1) + "</td>" +
                 "<td class='text-center align-middle' id='text-kategori-" + (count_class + 1) + "' > <input type='hidden' readonly name='kategori[]' value='" + kat_id + "' id='kategori-" + (count_class + 1) + "' >" + kat_text + " </td>" +
                 "<td class='text-center align-middle' id='text-role-" + (count_class + 1) + "' >" + role_text + "<input type='hidden' id='role-" + (count_class + 1) + "' name='role[]' readonly class='form-control' value='" + role_id + "'></td>" +
                 "<td class='text-center align-middle' id='text-pers-" + (count_class + 1) + "' >" + pers_text + "<input type='hidden' id='pers-" + (count_class + 1) + "' name='pers[]' readonly class='form-control' value='" + pers_id + "'></td>" +
                 "<td class='text-center align-middle' id='action-del-" + (count_class + 1) + "'><a  role='button' class='btn btn-sm btn-light disabled' id='tr-action-" + (count_class + 1) + "' ><i class='fas fa-trash text-white'></i></a></td>" +
                 "</tr>"
-            $("#tbody-gaji").append(frame);
+            $("#tbody-forum").append(frame);
             setTimeout(() => {
                 $("#tr-action-" + (count_class + 1)).attr("onclick", "gatDel(this," + (count_class + 1) + ")").removeClass('disabled').toggleClass("btn-light btn-danger");
             }, 200)
         } else {
-            swal("perhatian", "Kompensasi atau gaji harus di isi !!", "warning");
+            swal("perhatian", "Kategori wajib di isi !!", "warning");
         }
     }
 
@@ -45,8 +48,8 @@
         // console.log(ev);
         // console.log(y);
         $("#tr-comp-" + y).remove();
-        var class_c = $(".tr-compensasi").length;
+        var class_c = $(".tr-forum").length;
         if (class_c == 0) {
-            $("#tbody-gaji").html("<tr><td class='text-center align-middle' colspan='3'> Gaji belum ada </td></tr>");
+            $("#tbody-forum").html("<tr><td class='text-center align-middle' colspan='5'> <i class='fas fa-info-circle m-r-10'></i> Data peserta belum ada</td></tr>");
         }
     }
